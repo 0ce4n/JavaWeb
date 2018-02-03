@@ -1,0 +1,9 @@
+server:
+  port: 8081
+  context-path: /dhy
+username: wy
+age: 18
+content: "username: ${username}, age: ${age}"
+baby:
+  name: wy
+  age: 18
