@@ -2,12 +2,16 @@ package com.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * Created by duhaiyang on 2018/2/3.
  */
 @RestController
+@RequestMapping(value = "/index")
 public class HellowController {
     @Value("${username}")
     private  String username;
@@ -39,4 +43,15 @@ public class HellowController {
     public Object requestvale(@RequestParam(value = "name", required = false,defaultValue = "duhaiyang") String name){
         return name;
     }
+
+    //表单验证
+    @PostMapping(value = "/addgirl")
+    public Object addgril(@Valid girl girl, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            System.out.println(bindingResult.getFieldError().getDefaultMessage());
+            return bindingResult.getFieldError().getDefaultMessage();
+        }
+        return girl;
+    }
+
 }
